@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Experience</title>
+  <link rel="shortcut icon" href="Assets/photo/WhatsApp Image 2025-06-08 at 10.10.43_87e20d6a.jpg" type="image/x-icon">
+
+  <style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Georgia', serif;
+ 
+  color: #2e2e2e;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5%;
+ 
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  gap: 10px;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #2e2e2e;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #a67c52;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 40px 5%;
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  
+}
+
+.approach {
+  text-align: center;
+  padding: 50px 5%;
+
+}
+
+.approach h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.approach p {
+  font-size: 18px;
+  color:#555;
+}
+
+
+.container {
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+      background-color: #f5f2eb;
+    }
+    .left-section {
+      flex: 1;
+     
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .left-section img {
+      width: 90%;
+      max-width: 600px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 8px;
+      margin: 30px;
+    }
+    .right-section {
+      flex: 1;
+     
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 40px;
+    }
+    .text-content {
+      max-width: 500px;
+      color: #333;
+    }
+    .text-content h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .text-content p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #555;
+    }
+
+    .container-two {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .text-section {
+      flex: 1;
+      padding-right: 40px;
+    }
+
+    .text-section h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    .text-section p {
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .image-section {
+      flex: 1;
+    }
+
+    .image-section img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 30px 20px;
+      }
+
+      .text-section {
+        padding-right: 0;
+        margin-bottom: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .left-section, .right-section {
+        width: 100%;
+        padding: 20px;
+      }
+      .text-content h1 {
+        font-size: 24px;
+      }
+    }
+
+    .team-section {
+      text-align: center;
+      padding: 60px 20px;
+      background: #fff;
+    }
+
+    .team-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+
+    .team-member {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: #000;
+      color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .team-photo {
+      flex: 1 1 300px;
+      max-width: 400px;
+    }
+
+    .team-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 20px;
+      border-radius: 10px;
+    }
+
+    .team-info {
+      flex: 2 1 400px;
+      padding: 40px;
+      text-align: left;
+    }
+
+    .team-info h3 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      margin-left: 20px;
+    }
+
+    .team-info p {
+      line-height: 1.6;
+      font-size: 1rem;
+      margin-left: 20px;
+    }
+
+    .team-info a {
+      display: inline-block;
+      margin-top: 20px;
+      color: #ccc;
+      text-decoration: none;
+      border-bottom: 1px solid #ccc;
+      transition: color 0.3s;
+      margin-left: 20px;
+    }
+
+    .team-info a:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .team-member {
+        flex-direction: column;
+      }
+
+      .team-info {
+        padding: 20px;
+        text-align: center;
+      }
+    }
+
+
+     .container-three {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 50px;
+      max-width: 1200px;
+      margin: auto;
+          background: #f4f4f4;
+      color: #333;
+
+    }
+
+    .menu, .news {
+      flex: 1;
+      padding: 20px;
+      margin-left: 100px;
+    }
+
+    .menu h2, .news h2 {
+      font-size: 36px;
+      color: #2d2d4f;
+      margin-bottom: 20px;
+    }
+
+    .menu ul {
+      list-style: none;
+      line-height: 2;
+      font-size: 16px;
+    }
+
+    .menu ul li {
+      margin-bottom: 10px;
+    }
+
+    .social-icons {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    .social-icons i {
+      margin-right: 15px;
+      cursor: pointer;
+    }
+
+    .center-image {
+      flex: 1;
+      text-align: center;
+    }
+
+    .center-image img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 8px;
+    }
+
+    .news p {
+      margin-bottom: 20px;
+      color: #666;
+    }
+
+    .news input[type="text"],
+    .news input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-bottom: 1px solid #999;
+      font-size: 16px;
+    }
+
+    .news button {
+      padding: 10px 20px;
+      font-size: 14px;
+      background: none;
+      border: 1px solid #333;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+  margin: 50px;
+      font-size: 14px;
+      color: #555;
+
+    }
+
+    @media(max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .menu, .news, .center-image {
+        width: 100%;
+        text-align: center;
+      }
+
+      .menu ul {
+        padding-left: 0;
+      }
+    }
+
+    .footer-sec{
+        font-family: 'Georgia', serif;
+      background: #f4f4f4;
+      color: #333;
+     
+
+
+    }
+
+      .footer-sec a{
+ text-decoration: none;
+  color: #333;
+ 
+      }
+  </style>
+  
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+       <span> 📸Mayur.<small>Radhakrishna</small></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="ptgpy-website.html">Home</a></li>
+       
+        <li><a href="experiance.html">Experience</a></li>
+        <li><a href="contact.html">Get In Touch</a></li>
+        <li><a href="galary.html">Gallary</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="gallery">
+    <img src="Assets/photo/photo-8.jpg" alt="Bride Closeup">
+    <img src="Assets/photo/photo-5.jpg" alt="Couple">
+    <img src="Assets/photo/photo-4.jpg" alt="Bride at Table">
+    <img src="Assets/photo/photo-18.jpg" alt="Smiling Couple">
+  </section>
+
+  <section class="approach">
+    <h2>Our approach</h2>
+    <p>It's important for you to know the values we hold dear to us</p>
+  </section>
+
+
+
+ 
+
+  <div class="container">
+    <div class="left-section">
+      <img src="Assets/photo/photo-13.jpg" alt="Wedding Couple" />
+    </div>
+    <div class="right-section">
+      <div class="text-content">
+        <h1>Understanding<br>What you value.</h1>
+        <p>
+          We firmly believe that as a creative, understanding what you value is the most important part of our job.
+          From the very first interaction, we want to understand what you value. With our visual quizzes, we get a
+          good insight into understanding you, your relationships, and much more. Open-door communication throughout
+          the process helps capture people who are important to you, moments that are special for you, and things that
+          absolutely close to your heart. Trust us, it took us years to master this art of breaking ice in order to
+          create more connecting images.
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container-two">
+    <div class="text-section">
+      <h1>Always Here to Help.</h1>
+      <p>We have poured our heart and soul into educating you with our blogs and information videos. With over 10+ years of experience, we are here to serve you. Yes, you are not only getting our artist vision, we may take that role of bridesmaid who will remove flyways or Groomsman who will care to make your pocket square. We love to interact with families and blend in so we can really add value and capture those raw candid moments, that you can look back as a viewer and feel as if you are brought back to that very moment.</p>
+      <p>With being part of your wedding experience from day of booking to the time craft those ultimate wedding books, We literally become wedding planners in the process, helping you in any way because it’s all about the experience.</p>
+    </div>
+    <div class="image-section">
+      <img src="Assets/photo/photo-19.jpg" alt="Wedding Bride" />
+    </div>
+  </div>
+
+
+  <section class="team-section">
+    <h2>Our Team</h2>
+
+    <div class="team-member">
+      <div class="team-photo">
+        <img src="Assets/photo/WhatsApp Image 2025-06-08 at 10.10.43_87e20d6a.jpg" alt="Mayur Kisroliya" />
+      </div>
+      <div class="team-info">
+        <h3>Mayur Kisroliya</h3>
+        <p>
+           Lead Photographer Mayur Kisroliya. The multi talented photographer started photography from travel photography for the love of culture and tradition. With 3 years experience in multicultural weddings,  firmly believes wedding photographers have a responsibility to capture most precious moments, moments that will never happen again in your life. He also specializes ...
+        </p>
+        <a href="https://www.instagram.com/mayur.radhakrishna/">Read More ›</a>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="footer-sec">
+    <div class="container-three">
+    <div class="menu">
+      <h2>MENU</h2>
+      <ul>
+        <a href="ptgpy-website.html"><li>HOME</li></a>
+        <a href="galary.html"><li>Galary</li></a>
+        <a href=""><li>BLOG</li></a>
+        <a href="experiance.html"><li>EXPERIENCE</li></a>
+         <a href="contact.html"><li>GET IN TOUCH</li></a>
+       
+      </ul>
+      <div class="social-icons">
+        📞 &nbsp; 📷 &nbsp; ▶
+      </div>
+    </div>
+
+    <div class="center-image">
+      <img src="Assets/photo/WhatsApp Image 2025-06-10 at 11.26.06_e6002007.jpg" alt="Alfaaz Photography">
+    </div>
+
+    <div class="news">
+      <h2>THE NEWS</h2>
+      <p>SUBSCRIBE TO OUR NEWSLETTER FOR UPDATES AND NEWS</p>
+      <input type="text" placeholder="Name">
+      <input type="email" placeholder="Email Address">
+      <button>SUBSCRIBE</button>
+    </div>
+  </div>
+  </div>
+
+  <footer>
+    © Mayur.Radhakrishna 2025 - ALL RIGHTS RESERVED
+  </footer>
+
+</body>
+</html>

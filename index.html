@@ -1,53 +1,885 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   
-   <title>Rohit.Com</title>
-   <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Animated Image Slider</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Header section */
+        header{
+            width: 100%; 
+            max-width: 100%;
+            padding: 0 clamp(20px, 5vw, 100px);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.1);
+             font-family: 'Georgia', serif;
+ 
+        }
+
+        header nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(5px, 2vw, 15px);
+             font-family: 'Georgia', serif;
+ 
+        }
+
+        header nav a{
+            color: #fff;
+            padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 20px);
+            font-size: clamp(14px, 2vw, 17px);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border-radius: 8px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        a.active{
+            background: linear-gradient(135deg, #cde804cb, #a8c000);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(205, 232, 4, 0.3);
+        }
+
+        a:hover{
+            background: linear-gradient(135deg, #d006ebcb, #9900cc);
+            border-radius: 8px;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(208, 6, 235, 0.4);
+        }
+
+        /* Carousel */
+        .carousel{
+            width: 100vw;
+            height: 100vh;
+            margin-top: -60px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel .list .item{
+            width: clamp(160px, 15vw, 180px);
+            height: clamp(220px, 22vw, 250px);
+            position: absolute;
+            top: 80%;
+            transform: translateY(-70%);
+            left: 70%;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            background-position: 50% 50%;
+            background-size: cover;
+            z-index: 100;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel .list .item:nth-child(1),
+        .carousel .list .item:nth-child(2){
+            top: 0;
+            left: 0;
+            transform: translate(0, 0);
+            border-radius: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel .list .item:nth-child(3){
+            left: clamp(60%, 67%, 75%);
+        }
+
+        .carousel .list .item:nth-child(4){
+            left: calc(clamp(60%, 67%, 75%) + clamp(180px, 15vw, 200px));
+        }
+
+        .carousel .list .item:nth-child(5){
+            left: calc(clamp(60%, 67%, 75%) + clamp(360px, 30vw, 400px));
+        }
+
+        .carousel .list .item:nth-child(6){
+            left: calc(clamp(60%, 67%, 75%) + clamp(540px, 45vw, 600px));
+        }
+
+        .carousel .list .item:nth-child(n+7){
+            left: calc(clamp(60%, 67%, 75%) + clamp(720px, 60vw, 800px));
+            opacity: 0;
+        }
+
+        .list .item .content{
+            position: absolute;
+            top: 50%;
+            left: clamp(20px, 8vw, 100px);
+            transform: translateY(-50%);
+            width: clamp(300px, 40vw, 450px);
+            text-align: left;
+            color: #fff;
+            display: none;
+        }
+
+        .list .item:nth-child(2) .content{
+            display: block;
+        }
+
+        .content .title{
+            font-size: 36px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #f5e508cb, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            opacity: 0;
+            animation: animate 1s ease-in-out 0.3s 1 forwards;
+        }
+
+        .content .name{
+            font-size: clamp(16px, 3vw, 22px);
+            text-transform: uppercase;
+            font-weight: bold;
+            line-height: 1.2;
+            color: rgb(183, 216, 34);
+            margin-top: 10px;
+            opacity: 0;
+            animation: animate 1s ease-in-out 0.6s 1 forwards;
+        }
+
+        .content .des{
+            margin-top: 15px;
+            margin-bottom: 25px;
+            font-size: clamp(14px, 2.5vw, 20px);
+            margin-left: 5px;
+            line-height: 1.5;
+            opacity: 0;
+            animation: animate 1s ease-in-out 0.9s 1 forwards;
+        }
+
+        .content .btn{
+            margin-left: 5px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: animate 1s ease-in-out 1.2s 1 forwards;
+        }
+
+        .content .btn button{
+            padding: clamp(8px, 1.5vw, 12px) clamp(16px, 3vw, 24px);
+            border: none;
+            cursor: pointer;
+            font-size: clamp(14px, 2vw, 16px);
+            border: 2px solid #fff;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .content .btn button:nth-child(1){
+            background: linear-gradient(135deg, #fff, #f0f0f0);
+            color: #000;
+        }
+
+        .content .btn button:nth-child(1):hover{
+            background: linear-gradient(135deg, #f0f0f0, #ddd);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .content .btn button:nth-child(2){
+            background: transparent;
+            color: #14ff72cb;
+            border: 2px solid #14ff72cb;
+        }
+
+        .content .btn button:nth-child(2):hover{
+            background: linear-gradient(135deg, #14ff72cb, #00cc5a);
+            color: #fff;
+            border-color: #14ff72cb;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(20, 255, 114, 0.3);
+        }
+
+        @keyframes animate {
+            from{
+                opacity: 0;
+                transform: translate(0, 100px);
+                filter: blur(33px);
+            }
+            to{
+                opacity: 1;
+                transform: translate(0);
+                filter: blur(0);
+            }
+        }
+
+        /* Navigation arrows */
+        .arrows{
+            position: absolute;
+            top: clamp(75%, 80%, 85%);
+            right: clamp(45%, 52%, 60%);
+            z-index: 100;
+            width: clamp(200px, 25vw, 300px);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .arrows button{
+            width: clamp(45px, 6vw, 60px);
+            height: clamp(45px, 6vw, 60px);
+            border-radius: 50%;
+            background: linear-gradient(135deg, #cc14ffcb, #9900cc);
+            color: #fff;
+            border: none;
+            outline: none;
+            font-size: clamp(14px, 2vw, 18px);
+            font-family: monospace;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(204, 20, 255, 0.3);
+        }
+
+        .arrows button:hover{
+            background: linear-gradient(135deg, #fff, #f0f0f0);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+
+        .arrows button:active{
+            transform: translateY(-1px);
+        }
+
+        /* Progress bar */
+        .carousel .timeRunning{
+            position: absolute;
+            z-index: 1000;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #14ff72cb, #00cc5a);
+            left: 0;
+            top: 0;
+            animation: runningTime 7s linear 1 forwards;
+            box-shadow: 0 2px 10px rgba(20, 255, 114, 0.5);
+            margin-bottom: 50px;
+        }
+
+        @keyframes runningTime {
+            from{width: 0%;}
+            to{width: 100%;}
+        }
+
+        /* WhatsApp Icon - Fixed positioning */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-float img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        /* Enhanced responsive design */
+        @media screen and (max-width: 1200px){
+            .carousel .list .item:nth-child(3){
+                left: 65%;
+            }
+            .carousel .list .item:nth-child(4){
+                left: calc(65% + 160px);
+            }
+            .carousel .list .item:nth-child(5){
+                left: calc(65% + 320px);
+            }
+        }
+
+        @media screen and (max-width: 999px){
+            header{
+                height: 50px;
+                padding: 0 50px;
+            }
+            
+            .list .item .content{
+                left: 50px;
+                width: calc(100vw - 100px);
+            }
+            
+            .arrows{
+                right: 48%;
+                top: 78%;
+            }
+        }
+
+        @media screen and (max-width: 768px){
+            header{
+                padding: 0 20px;
+                height: 50px;
+            }
+
+            header nav{
+                gap: 8px;
+            }
+
+            .list .item .content{
+                top: 40%;
+                left: 20px;
+                width: calc(100vw - 40px);
+            }
+
+            .content .btn{
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .content .btn button{
+                width: auto;
+                min-width: 120px;
+            }
+
+            .arrows{
+                right: 50%;
+                transform: translateX(50%);
+                top: 75%;
+                gap: 20px;
+            }
+
+            .carousel .list .item{
+                width: 140px;
+                height: 200px;
+            }
+
+            .carousel .list .item:nth-child(3){
+                left: 58%;
+            }
+
+            .carousel .list .item:nth-child(4){
+                left: calc(58% + 150px);
+            }
+
+            .carousel .list .item:nth-child(5){
+                left: calc(58% + 300px);
+            }
+
+            .whatsapp-float {
+                width: 70px;
+                height: 70px;
+                bottom: 20px;
+                right: 30px;
+              
+            }
+
+            .whatsapp-float img {
+                width: 40px;
+                height: 40px;
+               
+            }
+        }
+
+        @media screen and (max-width: 480px){
+            header{
+                padding: 0 15px;
+            }
+
+            .list .item .content{
+                left: 15px;
+                width: calc(100vw - 30px);
+                top: 35%;
+            }
+
+            .carousel .list .item{
+                width: 120px;
+                height: 180px;
+            }
+
+            .carousel .list .item:nth-child(3){
+                left: 55%;
+            }
+
+            .carousel .list .item:nth-child(4){
+                left: calc(55% + 130px);
+            }
+
+            .arrows{
+                top: 70%;
+                gap: 15px;
+            }
+
+            .content .des{
+                margin-bottom: 20px;
+            }
+        }
+
+        @media screen and (max-width: 320px){
+            .list .item .content{
+                left: 10px;
+                width: calc(100vw - 20px);
+            }
+
+            .carousel .list .item:nth-child(3){
+                left: 50%;
+            }
+
+            .content .btn button{
+                min-width: 100px;
+            }
+        }
+
+        /* Add some visual enhancements */
+        .carousel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Smooth scrolling for better UX */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Better focus states for accessibility */
+        button:focus-visible,
+        a:focus-visible {
+            outline: 2px solid #14ff72cb;
+            outline-offset: 2px;
+            background-color: red;
+        }
+
+
+        .gallery {
+      display: grid;
+      grid-template-areas: 
+        "img1 img2 img3"
+        "img4 img2 img5"
+        "img4 img6 img5";
+      gap: 20px;
+      max-width: 90%;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .img1 { grid-area: img1; width: 200px; }
+    .img2 { grid-area: img2; width: 250px; }
+    .img3 { grid-area: img3; width: 200px; }
+    .img4 { grid-area: img4; width: 300px; }
+    .img5 { grid-area: img5; width: 200px; }
+    .img6 { grid-area: img6; width: 250px; }
+
+    @media (max-width: 768px) {
+      .gallery {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+     
+
+       
+
+    .section-title {
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 30px;
+      margin-bottom: 10px;
+      margin-top: 50px;
+    }
+
+    .green-line {
+      width: 80px;
+      height: 4px;
+      background-color: #73A728;
+      margin: 0 auto 30px;
+    }
+
+    .icon-heading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+      margin: 30px;
+    }
+
+    .icon-heading img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .description {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 16px;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    .description strong {
+      font-weight: 600;
+    }
+
+      footer {
+      background-color: #f1f1f1;
+      text-align: center;
+      padding: 40px 20px;
+      margin: 30px;
+    }
+
+    .footer-text {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .social-icons a {
+      margin: 0 10px;
+      color: #222;
+      font-size: 24px;
+      text-decoration: none;
+      transition: color 0.3s ease;
    
+
+
+     
+    }
+
+    
+
+    
+
+    .footer-bottom {
+      margin-top: 30px;
+      font-size: 16px;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-bottom img {
+      height: 25px;
+      margin-left: 5px;
+    }
+    
+    </style>
+
 </head>
 <body>
-     <center>
-    <big><h1>Welcome !</h1></big><br>
-     <img src="assets/image/rohit.png" alt="this is the rohit image" height="400px"><br><br> </center>
+    <header>
+        <nav>
+            <a href="" class="active">Home</a>
+            <a href="galary.html">Gallary</a>
+            <a href="experiance.html">Experiance</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
 
-    <center>
-     <h1 style="color: red;"> 💫 Hi 👋, I'm Rohit N.Kharpuriye</h1>
-     <p><h1>A passionate Full Stack Developer || Software Engineer ||  from India </h1></p>
-    <h1><p>Email Me 👉 ✉️ rohitkharpuiye99@gmail.com  For Collaboration/Project or Anything Else. 😊😊</p></h1> </center>
+    <div class="carousel">
+        <div class="list">
+            <div class="item" style="background-image: url(Assets/photo/ccc.jpg);">
+                <div class="content">
+                    <div class="title">Mayur.radhakrishna</div>
+                    <div class="name">Photography And Videography</div>
+                    <div class="des">We capture the exhilarating movement at your pre-wedding shoot</div>
+                    <div class="btn">
+                       
+                        <a href="https://wa.link/ixanl4" ><button>Book Now</button></a>
+                    </div>
+                </div>
+            </div>
 
-     <br><hr>
-     <br>
- 
-     
- <center><img src="https://profile-readme-generator.com/assets/snake.svg" alt="Snake animation" /></center> 
+            <div class="item" style="background-image: url(Assets/photo/pre-wedding.jpg);">
+                <div class="content">
+                    <div class="title">Mayur.radhakrishna</div>
+                    <div class="name">Pre-Wedding Shoot</div>
+                    <div class="des">We capture the exhilarating movement at your pre-wedding shoot</div>
+                    <div class="btn">
+                        <button>See More</button>
+                       <a href="https://www.youtube.com/@mayur.RadhaKrishna-wv3ee/shorts"><button>Subscribe</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" style="background-image: url(https://images.unsplash.com/photo-1574397188309-e83dfe918ecb?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFyYXRoaSUyMHdlZGRpbmd8ZW58MHx8MHx8fDA%3D);">
+                <div class="content">
+                    <div class="title">Mayur.radhakrishna</div>
+                    <div class="name">Wedding Photography</div>
+                    <div class="des">We capture the exhilarating movement at your pre-wedding shoot</div>
+                    <div class="btn">
+                        <button>See More</button>
+                       <a href="https://www.youtube.com/@mayur.RadhaKrishna-wv3ee/shorts"> <button>Subscribe</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" style="background-image: url(https://onebighappyphoto.com/wp-content/uploads/Indian-newborn-baby-boy-photoshoot-9675-One-Big-Happy-Photo.jpg);">
+                <div class="content">
+                    <div class="title">Mayur.radhakrishna</div>
+                    <div class="name">New Born Baby Photography</div>
+                    <div class="des">We capture the exhilarating movement at your pre-wedding shoot</div>
+                    <div class="btn">
+                        <button>See More</button>
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" style="background-image: url(https://images.pexels.com/photos/6089654/pexels-photo-6089654.jpeg?cs=srgb&dl=pexels-shameel-mukkath-3421394-6089654.jpg&fm=jpg);">
+                <div class="content">
+                    <div class="title">Mayur.radhakrishna</div>
+                    <div class="name">Food Photography</div>
+                    <div class="des">We capture the exhilarating movement at your pre-wedding shoot</div>
+                    <div class="btn">
+                        <button>See More</button>
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" style="background-image: url(https://images.pexels.com/photos/1667071/pexels-photo-1667071.jpeg?cs=srgb&dl=pexels-laryssa-suaid-798122-1667071.jpg&fm=jpg);">
+                <div class="content">
+                    <div class="title">Mayur.radhakrishna</div>
+                    <div class="name">Product Photography</div>
+                    <div class="des">We capture the exhilarating movement at your pre-wedding shoot</div>
+                    <div class="btn">
+                        <button>See More</button>
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--next prev button-->
+        <div class="arrows">
+            <button class="prev" aria-label="Previous slide"><</button>
+            <button class="next" aria-label="Next slide">></button>
+        </div>
+
+        <!-- time running -->
+        <div class="timeRunning"></div>
+    </div>
+
+    <!-- WhatsApp Float Icon - Moved outside and properly positioned -->
+    <a href="https://wa.link/ixanl4" class="whatsapp-float" target="_blank" aria-label="Contact us on WhatsApp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png" alt="WhatsApp">
+    </a>
 
 
-     <br><hr><br>
 
- <blockquote>
-     <h1> <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"  height="80px"><h1>
-        <h1>This Is My First Instagram Account</h1>
-        <a href="https://www.instagram.com/rohit_kharpuriye/?hl=en"><h1 style="color: red;">CLICK HERE </h1></a> <br>
+  <div class="section-title">WHAT WE DO</div>
+  <div class="green-line"></div>
 
-      </p> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaUEIiB1qf677svU7InQPI98CAXXZoosFZ3g&s "  height="100"><p>
-        <h1>This Is My First Project</h1> 
-        <a href=" https://rohitfullstackdevloper.github.io/RohitDeveloper/"><h1 style="color: red;">CLICK HERE</h1></a>
+  <div class="icon-heading">
+    <img src="Assets/photo/ccc.jpg" alt="Camera Icon" />
+    <span>Wedding Photography</span>
+  </div>
 
-        <br><hr><br>
+  <div class="image-container">
+    <img src="Assets/photo/Devayani-sagar-marathi-wedding-siddarth-palace-pune-wedding-photographers-in-pune0051.jpg" alt="Bride in Bathtub" />
+  </div>
+
+  <div class="description">
+    We are the team of <strong>creative wedding photographers</strong> with a passion for <strong>candid wedding photography</strong> making us more popular as one of the <strong>best wedding photographers in nagpur, India</strong>. We are specialised to capture artistically different unique moments that the couple wish to be present in the memories.
+  </div>
+
+  
+   <div class="icon-heading">
+    <img src="Assets/photo/ccc.jpg" alt="Camera Icon" />
+    <span>pre-Wedding Photography</span>
+  </div>
+
+  <div class="image-container">
+    <img src="Assets/photo/pre-wedding.jpg"Bride in Bathtub" />
+  </div>
+
+  <div class="description">
+    We are the team of <strong>creative wedding photographers</strong> with a passion for <strong>pre-wedding photography</strong> making us more popular as one of the <strong>best wedding photographers in nagpur, India</strong>. We are specialised to capture artistically different unique moments that the couple wish to be present in the memories.
+  </div>
+
+  </div>
 
 
-      <center> <h1 style="color:darkgreen;"><big> Thank You </big></h1></center><br><hr><br>
 
+<footer>
+  <div class="footer-text">
+    © Mayur.radhakrishna / ALL RIGHTS RESERVED
+  </div>
 
-      <center><video src="assets/vidio/media_20250221_160859_1176695340298794287.mp4" controls></video></center>
+  <div class="social-icons">
+    <a id="rk" href="#"><i class="fab fa-facebook-f"></i></a>
+    <a id="rk" href="https://www.instagram.com/mayur.radhakrishna/"><i class="fab fa-instagram"></i></a>
+    <a id="rk" href="https://www.youtube.com/@mayur.RadhaKrishna-wv3ee/shorts"><i class="fab fa-youtube"></i></a>
+    <a id="rk" href="#"><i class="fab fa-vimeo-v"></i></a>
+  </div>
 
-      
-
-
-
-
+  <div class="footer-bottom">
+    Designed by
+    <img src="Assets/photo/WhatsApp Image 2025-06-08 at 10.10.43_87e20d6a.jpg" alt="mayur">
+  </div>
+</footer>
 
 </body>
 </html>
+
+</body>
+</html>
+
+
+
+    <script>
+        var nextBtn = document.querySelector('.next'),
+            prevBtn = document.querySelector('.prev'),
+            carousel = document.querySelector('.carousel'),
+            list = document.querySelector('.list'), 
+            item = document.querySelectorAll('.item'),
+            runningTime = document.querySelector('.carousel .timeRunning') 
+
+        let timeRunning = 3000 
+        let timeAutoNext = 7000
+
+        nextBtn.onclick = function(){
+            showSlider('next')
+        }
+
+        prevBtn.onclick = function(){
+            showSlider('prev')
+        }
+
+        let runTimeOut 
+
+        let runNextAuto = setTimeout(() => {
+            nextBtn.click()
+        }, timeAutoNext)
+
+        function resetTimeAnimation() {
+            runningTime.style.animation = 'none'
+            runningTime.offsetHeight /* trigger reflow */
+            runningTime.style.animation = null 
+            runningTime.style.animation = 'runningTime 7s linear 1 forwards'
+        }
+
+        function showSlider(type) {
+            let sliderItemsDom = list.querySelectorAll('.carousel .list .item')
+            if(type === 'next'){
+                list.appendChild(sliderItemsDom[0])
+                carousel.classList.add('next')
+            } else{
+                list.prepend(sliderItemsDom[sliderItemsDom.length - 1])
+                carousel.classList.add('prev')
+            }
+
+            clearTimeout(runTimeOut)
+
+            runTimeOut = setTimeout( () => {
+                carousel.classList.remove('next')
+                carousel.classList.remove('prev')
+            }, timeRunning)
+
+            clearTimeout(runNextAuto)
+            runNextAuto = setTimeout(() => {
+                nextBtn.click()
+            }, timeAutoNext)
+
+            resetTimeAnimation() // Reset the running time animation
+        }
+
+        // Start the initial animation 
+        resetTimeAnimation()
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevBtn.click()
+            } else if (e.key === 'ArrowRight') {
+                nextBtn.click()
+            }
+        })
+
+        // Pause auto-scroll on hover
+        carousel.addEventListener('mouseenter', function() {
+            clearTimeout(runNextAuto)
+            runningTime.style.animationPlayState = 'paused'
+        })
+
+        carousel.addEventListener('mouseleave', function() {
+            runNextAuto = setTimeout(() => {
+                nextBtn.click()
+            }, timeAutoNext)
+            runningTime.style.animationPlayState = 'running'
+        })
+    </script>
+</body>
+</html>
+
+
+
